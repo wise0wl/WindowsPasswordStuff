@@ -1,0 +1,9 @@
+$creds = get-credential -Message 'Enter username and password to store in Windows vault' -UserName $env:userName
+if ($creds -eq $null)
+{
+$wshell = New-Object -ComObject Wscript.Shell
+$wshell.Popup("Ugh...you have to enter a username and password. Try again")
+exit
+} else {
+set-VaultCredential -Resource SuperSecretPassword -Credential $creds 
+}
